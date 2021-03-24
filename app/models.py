@@ -17,6 +17,9 @@ class Cat(models.Model):
     color = models.CharField(max_length=40)
     gender = models.BooleanField()
 
+    def gender_type(self):
+        return self.gender
+
     def __str__(self):
         return "%s %s %s" % (self.name, self.color, self.gender)
 
