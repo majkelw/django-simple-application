@@ -9,12 +9,6 @@ from .models import Prey
 from .models import Hunting
 from .models import HuntingDetails
 
-admin.site.register(User)
-admin.site.register(UserCatOwner)
-admin.site.register(Prey)
-admin.site.register(Hunting)
-admin.site.register(HuntingDetails)
-
 
 def boolean_icons(value):
     icon_true = '✅'
@@ -26,8 +20,12 @@ def boolean_icons(value):
         return format_html(html_icon, mark_safe(icon_false))
 
 
-class Admin(admin.ModelAdmin):
-    list_display = ['name', 'color', 'gender_type']
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'email', 'cats_number']
+
+
+class CatAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'color', 'gender_type']
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
@@ -39,4 +37,25 @@ class Admin(admin.ModelAdmin):
         return boolean_icons(obj.gender)
 
 
-admin.site.register(Cat, Admin)
+class PreyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'type']
+
+
+class HuntingAdmin(admin.ModelAdmin):
+    list_display = ['id', 'cat', 'duration']
+
+
+class HuntingDetailsAdmin(admin.ModelAdmin):
+    list_display = ['id', 'hunting', 'cat', 'prey']
+
+
+class UserCatOwnerAdmin(admin.ModelAdmin):
+    list_display = ['user', 'cat']
+
+
+admin.site.register(Cat, CatAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(UserCatOwner,UserCatOwnerAdmin)
+admin.site.register(Prey, PreyAdmin)
+admin.site.register(Hunting, HuntingAdmin)
+admin.site.register(HuntingDetails, HuntingDetailsAdmin)

@@ -47,7 +47,7 @@ class Hunting(models.Model):
     duration = models.IntegerField(default=0)
 
     def __str__(self):
-        return "%s %s" % (self.cat, self.duration)
+        return "%d" % self.id
 
 
 class HuntingDetails(models.Model):
