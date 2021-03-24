@@ -1,6 +1,7 @@
-from .models import User, UserCatOwner, Cat
+from .models import User, UserCatOwner, Cat, Hunting, HuntingDetails, Prey
 from rest_framework import viewsets
-from .serializer import UserSerializer, UserCatOwnerSerializer, CatSerializer
+from .serializer import UserSerializer, UserCatOwnerSerializer, CatSerializer, HuntingSerializer, \
+    HuntingDetailsSerializer, PreySerializer
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -16,3 +17,18 @@ class UserCatOwnerViewSet(viewsets.ReadOnlyModelViewSet):
 class CatViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Cat.objects.all()
     serializer_class = CatSerializer
+
+
+class PreyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Prey.objects.all()
+    serializer_class = PreySerializer
+
+
+class HuntingViewSet(viewsets.ModelViewSet):
+    queryset = Hunting.objects.all()
+    serializer_class = HuntingSerializer
+
+
+class HuntingDetailsViewSet(viewsets.ModelViewSet):
+    queryset = HuntingDetails.objects.all()
+    serializer_class = HuntingDetailsSerializer
